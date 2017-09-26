@@ -7,7 +7,11 @@ const app = express(); // Creates an express app
 //Required Middleware
 const checkForSession = require(`${__dirname}/middlewares/checkForSession`);
 
-//Use the Middleware
+//Required Controllers
+const sc = require(`${__dirname}/controllers/swag_controller`);
+
+//Use the Top-Level Middleware
+//app.use means it is top-level
 app.use(bodyParser.json()); // Middleware that uses the body-parser
 app.use(session({
   secret: 'tH3 $3Kr3T 1$ Th@ t3h mEs$@Ge 1s $tIlL r3@dA8L3', // key used for incryption
@@ -16,5 +20,8 @@ app.use(session({
 }));
 app.use(checkForSession);
 
+const swagUrl = '/api/swag';
+app.get(swagUrl, sc.read);
+
 const port = 3000;
-app.listen(port, () => {console.log(`Server listening ${port.toLocaleString()} under the sea...`)}) // This should be normally called after the database is aquired. toLocaleString is for fun.
+app.listen(port, () => {console.log(`Server listening ${port.toLocaleString()} leagues under the sea...`)}) // This should be normally called after the database is aquired. toLocaleString is for fun.
