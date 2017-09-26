@@ -1,7 +1,7 @@
-let users = require(`${__dirname}/models/users`);
+let users = require(`${__dirname}/../models/users`);
 let id = 1;
 
-module.exports({
+module.exports = {
   login(req,res,next){
     const {username, password} = req.body;
     const matchedUser = users.filter(user => user.username === username && user.password === password);
@@ -27,4 +27,4 @@ module.exports({
   getUser(req,res,next){
     res.status(200).send(req.session.user);
   }
-})
+};

@@ -9,6 +9,7 @@ const checkForSession = require(`${__dirname}/middlewares/checkForSession`);
 
 //Required Controllers
 const sc = require(`${__dirname}/controllers/swag_controller`);
+const ac = require(`${__dirname}/controllers/auth_controller`);
 
 //Use the Top-Level Middleware
 //app.use means it is top-level
@@ -22,6 +23,11 @@ app.use(checkForSession);
 
 const swagUrl = '/api/swag';
 app.get(swagUrl, sc.read);
+
+app.post('/api/login', ac.login);
+app.post('/api/register', ac.register);
+app.post('/api/signout', ac.signout);
+app.get('/api/user', ac.getUser);
 
 const port = 3000;
 app.listen(port, () => {console.log(`Server listening ${port.toLocaleString()} leagues under the sea...`)}) // This should be normally called after the database is aquired. toLocaleString is for fun.
