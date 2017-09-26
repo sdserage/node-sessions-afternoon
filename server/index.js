@@ -22,6 +22,7 @@ app.use(session({
   saveUninitialized: false //
 }));
 app.use(checkForSession);
+app.use(express.static(`${__dirname}/../public/build`));
 
 const swagUrl = '/api/swag';
 app.get(swagUrl, sc.read);
